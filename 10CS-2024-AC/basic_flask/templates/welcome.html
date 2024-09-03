@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome Page</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        .logout-btn {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="w3-container w3-center">
+        <h1>Welcome {{user}}, you are {{ age }} years old. Ready to get started?</h1>
+        <img src="{{ url_for('static', filename='../images/img.png') }}" alt="Welcome Image" class="w3-image" style="max-width:100%">
+        <a href="{{ url_for('logout') }}" class="logout-btn" >Logout </a>
+    </div>
+
+    <a href="{{ url_for('calculator') }}">Go to Calculator</a>
+
+</body>
+
+</html>
+
