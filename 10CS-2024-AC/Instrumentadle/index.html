@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instrumental Guessing Game</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        .guess-container { margin-top: 20px; }
+        input[type="text"] { padding: 10px; font-size: 16px; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <h1>Guess the Song Instrumental</h1>
+    <button id="start-game">Start Game</button>
+    <div class="guess-container">
+        <input type="text" id="user-guess" placeholder="Enter your guess...">
+        <button id="submit-guess">Submit Guess</button>
+    </div>
+    <p id="message"></p>
+    <audio id="audio" preload="auto"></audio>
+
+    <script>
+        let currentSong = null;
+        let audio = document.getElementById('audio');
+        let attempt = 0;
+
+        // Starting the game by fetching a random song
+        document.getElementById('start-game').addEventListener('click', function() {
+            fetch('/get_song')
+                .then(response => response.json())
+                .then(data => {
+                    currentSong = data.song;
+                    document.getElementById('message').textContent = 'Listen to the song snippet!';
+                    attempt = 0;
+                    audio.src = currentSong.file;  // Set the audio source to the correct file
+                    audio.currentTime = 0;
+                    audio.play();
+                });
+        });
+
+        // Submits the guess
+        document.getElementById('submit-guess').addEventListener('click', function() {
+            let guess = document.getElementById('user-guess').value.trim().toLowerCase();
+            if (guess === currentSong.title.toLowerCase()) {
+                document.getElementById('message').textContent = 'Correct! Next song...';
+                setTimeout(() => {
+                    document.getElementById('start-game').click();
+                }, 1000);  // Wait a bit before starting the next song
+            } else {
+                attempt++;
+                if (attempt < 6) {  // If the number of guesses are less than 6, you can keep guessing
+                    document.getElementById('message').textContent = `Wrong! Try again!`;
+                    audio.currentTime = 0;
+                    audio.play();  // Replay the song snippet if you get the guess wrong
+                } else {    // If you get more than 6 guesses wrong then it is game-over
+                    document.getElementById('message').textContent = `Game over. The song was: ${currentSong.title}`;
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
