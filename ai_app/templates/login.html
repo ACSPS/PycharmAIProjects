@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+
+{% block content %}
+<body>
+    <h1>Login</h1>
+    <form action="/login" method="post">
+        Username: <input type="text" name="username" required><br>
+        Password: <input type="password" name="password" required><br>
+        <input type="submit" value="Login" class="w3-button login-button">
+    </form>
+</body>
+{% endblock %}
+
+
+ <style> /*This is the styling section*/
+        .login-button {
+            background-color: #9C27B0; /*To make the login button purple*/
+            color: white;
+
+        }
+        .login-button:hover {
+    box-shadow: 0 0 20px #9C27B0, 0 0 30px #9C27B0; /* Glowing effect */
+}
+        .register-button {
+            background-color: #4CAF50; /* To make the register button green*/
+            color: white;
+        }
+    </style>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome Page</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        .logout-btn {
+            background-color: red;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .chat-container {
+            margin: 20px auto;
+            padding: 10px;
+            max-width: 600px;
+        }
+        .chat-box {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 5px;
+        }
+        button {
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="w3-container w3-center">
+        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+        <h1>Welcome to the AI App, {{ user }}</h1>
+
+        <div class="chat-container">
+            <h2>AI Chatbot</h2>
+
+            <div class="chat-box">
+                {% for message in messages %}
+                    <div><strong>{{ message.sender }}:</strong> {{ message.text }}</div>
+                {% endfor %}
+            </div>
+
+            <form action="{{ url_for('chat') }}" method="POST" class="input-container">
+                <input type="text" name="user_input" placeholder="Type your message..." required />
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
+

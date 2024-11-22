@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block title %}Index{% endblock %}
-
 {% block head %}
 
 <h1>Welcome</h1>
@@ -14,17 +13,8 @@
         <label for="age">Age:</label>
         <input type="number" name="age" id="age" required>
         <br>
-        <input type="submit" value="Register" class="w3-button w3-green">
+        <input type="submit" value="Register" class="w3-button w3-blue">
     </form>
-    <p>Already have an account? <a href="/login" class="w3-button w3-blue">Login</a></p>
-
-{% block content %}
-<body>
-    <div class="w3-container w3-center">
-        <img src="{{ url_for('static', filename='') }}" alt="Welcome Image" class="w3-image" style="max-width:100%">
-    </div>
-</body>
-{% endblock %}
+    <p>Already have an account? <a href="/login" class="w3-button w3-purple">Login</a></p>
 
 {% endblock %}
-
